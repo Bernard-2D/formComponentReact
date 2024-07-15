@@ -61,6 +61,7 @@ export type FormProps<V = any, P = ItemProps> = {
     | ((item?: GenerateWidgetItem<P>) => GenerateWidgetItem<P>);
   children?: unknown;
   initialValues?: unknown;
+  value?: unknown;
   schema?: Array;
   components?: RegisteredComponents;
   plugins?: Record<string, unknown>;

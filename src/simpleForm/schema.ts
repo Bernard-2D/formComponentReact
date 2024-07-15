@@ -283,7 +283,7 @@ export const schemaTemplate = [
   },
   {
     name: "Input_SC1b_7",
-    type: "Input.TextArea",
+    type: "TextArea",
     props: {
       placeholder: "请输入",
       maxLength: 500,

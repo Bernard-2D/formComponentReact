@@ -9,10 +9,10 @@ import FormComponent from "./formComponent";
 
 export default function FormRender(props: FormProps) {
   const form = useForm({
-    defaultValues: undefined,
-    values: undefined,
+    defaultValues: props?.initialValues as any,
+    values: props?.value as any,
   });
-  console.log("props", props?.schema);
+  // console.log("props", props?.schema);
   return (
     <Form {...form}>
       <form>
