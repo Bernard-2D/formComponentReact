@@ -42,8 +42,9 @@ const widgets = {
   "TimePicker.RangePicker": TimePicker.RangePicker,
 };
 
-export type CustomFormRenderProps = FormProps;
-export default function FormRender(props: CustomFormRenderProps) {
+export default function FormRender(props: FormProps) {
+  console.log('formRender一级的props', props);
+  
   const { components, variables, ...rest } = props;
   return (
     <DefaultFormRender

@@ -1,6 +1,6 @@
 import React, { CSSProperties } from "react";
 export type Layout = ("horizontal" | "vertical") & string;
-import { SimpleForm } from "./store";
+// import { SimpleForm } from "./store";
 
 export interface ItemProps {
   label?: React.ReactNode;
@@ -41,12 +41,7 @@ export type FormItemOptions<P = ItemProps> = Omit<P, "children"> & {
     | React.ForwardRefExoticComponent<any>
     | null;
 };
-export type CustomUnionType<P = {}> =
-  | GenerateWidgetItem<P>
-  | Array<GenerateWidgetItem<P>>
-  | ReactComponent<unknown>
-  | Function
-  | ReactNode;
+
 export type FormProps<V = any, P = ItemProps> = {
   watch?: {
     [key: string]:
@@ -63,9 +58,12 @@ export type FormProps<V = any, P = ItemProps> = {
   initialValues?: unknown;
   value?: unknown;
   schema?: Array;
+  // submitBtnText?: string;
+  // closeBtnText?: string;
   components?: RegisteredComponents;
-  plugins?: Record<string, unknown>;
+  // plugins?: Record<string, unknown>;
   variables?: Record<string, unknown>;
-  form?: SimpleForm<V>;
+  form?: UseFormReturn;
+  // handleSubmit?: UseFormHandleSubmit<TFieldValues, TTransformedValues>;
 } & FormItemOptions<P> &
   CreateFormProps;
