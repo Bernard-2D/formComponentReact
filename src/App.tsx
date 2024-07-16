@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import TestXForm from "./xForm/test";
 // import { FormProps } from "./simpleForm/myFormRender/render";
 // import { Form } from "./simpleForm/myFormRender/components/formItem";
 // import FormComponent from "./simpleForm/myFormRender/formComponent";
@@ -64,6 +65,7 @@ function App() {
           提交
         </Button>
       </div>
+      <TestXForm />
     </div>
   );
 }
