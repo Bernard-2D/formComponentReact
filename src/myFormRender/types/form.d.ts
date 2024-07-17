@@ -51,15 +51,15 @@ export type FormProps<V = any, P = ItemProps> = {
         }
       | WatchHandler;
   };
-  options?:
-    | GenerateWidgetItem<P>
-    | ((item?: GenerateWidgetItem<P>) => GenerateWidgetItem<P>);
+  // options?:
+  //   | GenerateWidgetItem<P>
+  //   | ((item?: GenerateWidgetItem<P>) => GenerateWidgetItem<P>);
   children?: unknown;
   initialValues?: unknown;
   value?: unknown;
   schema?: Array;
   // submitBtnText?: string;
-  // closeBtnText?: string;
+  widgets?: RegisteredComponents;
   components?: RegisteredComponents;
   // plugins?: Record<string, unknown>;
   variables?: Record<string, unknown>;

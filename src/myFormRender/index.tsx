@@ -19,37 +19,30 @@ import dayjs from "dayjs";
 
 const widgets = {
   Input: Input,
-  "Input.TextArea": Input.TextArea,
-  "Input.Password": Input.Password,
-  "Input.Search": Input.Search,
   InputNumber: InputNumber,
-  Checkbox: Checkbox,
-  "Checkbox.Group": Checkbox.Group,
+  Checkbox: Checkbox.Group,
   DatePicker: DatePicker,
-  "DatePicker.RangePicker": DatePicker.RangePicker,
+  DateRangePicker: DatePicker.RangePicker,
   Mentions: Mentions,
-  "Mentions.Option": Mentions.Option,
-  Radio: Radio,
-  "Radio.Group": Radio.Group,
-  "Radio.Button": Radio.Button,
+  Radio: Radio.Group,
+  RadioButton: Radio.Button,
   Rate: Rate,
-  Select: Select,
-  "Select.Option": Select.Option,
+  Select: Select.Option,
   TreeSelect: TreeSelect,
   Slider: Slider,
   Switch: Switch,
   TimePicker: TimePicker,
-  "TimePicker.RangePicker": TimePicker.RangePicker,
+  TimeRangePicker: TimePicker.RangePicker,
 };
 
 export default function FormRender(props: FormProps) {
-  console.log('formRender一级的props', props);
+  console.log('Default一级的props', props);
   
   const { components, variables, ...rest } = props;
   return (
     <DefaultFormRender
-      options={{ props: { autoComplete: "off" } }}
-      components={{ ...widgets, ...components }}
+      // options={{ props: { autoComplete: "off" } }}
+      widgets={{ ...widgets, ...components }}
       variables={{ ...variables, dayjs }}
       {...rest}
     />

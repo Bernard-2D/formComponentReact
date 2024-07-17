@@ -1,8 +1,9 @@
 // import * as React from "react";
-// import { Input } from "../../ui/input";
+import { Input } from "../ui/input";
 // import { Select } from "../../ui/select";
-// import { cn } from '../../utils/css'
-import { Select, Input, Radio, Checkbox, Switch } from "antd";
+import { cn } from "../utils/css";
+// import { useForm } from "react-hook-form";
+import { Select, Radio, Checkbox, Switch } from "antd";
 import {
   FormControl,
   FormField,
@@ -10,39 +11,58 @@ import {
   FormLabel,
   FormMessage,
 } from "./components/formItem";
+// import { getWidget } from "./mapping";
 
 export default function FormComponent(componentProps: any) {
-  // console.log('componentProps', componentProps.form);
-
+  // const { watch } = useForm()
+  // console.log('componentProps', form);
+  const { widgets, form, type, name, label, props } = componentProps;
+  const { hidden, disabled } = props;
   function setFormValue(name: string, value: any) {
-    console.log(name, "输入的值", value);
-    componentProps.form.setValue(name, value);
-    console.log("表单的值", componentProps.form.getValues());
+    // console.log(name, "输入的值", value);
+    form.setValue(name, value);
+    // console.log("表单的值", form.getValues());
   }
+  let hiddenItem = true;
+  let disabledItem = true;
+  // const valWatch = watch('radioType')
+  // console.log('监听单选', valWatch);
+  
+  if (hidden) {
+    const formData = form.getValues();
+    const dec = eval(hidden);
+    hiddenItem = dec;
+  }
+  // const Widget = getWidget(type, widgets);
+
+  // console.log('输出的Widget', Widget);
 
   let Component = null;
-  if (componentProps.type) {
-    switch (componentProps.type) {
+  if (type) {
+    switch (type) {
       case "Input":
-        console.log(componentProps?.name, "的props", componentProps.form.control);
+        console.log(name, "的props", props);
         Component = (
           <FormField
-            control={componentProps.form?.control}
-            name={componentProps?.name}
+            control={form?.control}
+            name={name}
             render={(field) => (
-              <FormItem className="flex w-full justify-start items-center">
-                <FormLabel className="w-1/6 font-bold">
+              <FormItem
+                className={cn(
+                  "flex w-full justify-start items-center ",
+                  hiddenItem && "hidden "
+                )}
+              >
+                <FormLabel className="w-1/6">
                   {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
-                  {componentProps.label}：
+                  {label}：
                 </FormLabel>
                 <FormControl>
                   <Input
                     className="h-9 text-sm"
-                    {...componentProps.props}
-                    onChange={(e) =>
-                      setFormValue(componentProps.name, e.target.value)
-                    }
-                    { ...field }
+                    {...props}
+                    onChange={(e) => setFormValue(name, e.target.value)}
+                    {...field}
                   />
                 </FormControl>
                 <FormMessage />
@@ -52,63 +72,60 @@ export default function FormComponent(componentProps: any) {
         );
         break;
       case "Select":
-        // console.log("Select的props", componentProps.props);
+        // console.log("Select的props", props);
         Component = (
           <FormItem className="flex w-full justify-start items-center">
-            <FormLabel className="w-1/6 font-bold">
+            <FormLabel className="w-1/6">
               {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
-              {componentProps.label}：
+              {label}：
             </FormLabel>
             <FormControl>
-              <Select
-                {...componentProps.props}
-                onChange={(e) => setFormValue(componentProps.name, e)}
-              />
+              <Select {...props} onChange={(e) => setFormValue(name, e)} />
             </FormControl>
             <FormMessage />
           </FormItem>
         );
         break;
       case "Radio":
-        // console.log("Radio的props", componentProps.props);
+        // console.log("Radio的props", props);
         Component = (
           <FormItem className="flex w-full justify-start items-center">
-            <FormLabel className="w-1/6 font-bold">
+            <FormLabel className="w-1/6">
               {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
-              {componentProps.label}：
+              {label}：
             </FormLabel>
             <FormControl>
-              <Radio.Group {...componentProps.props} />
+              <Radio.Group {...props} />
             </FormControl>
             <FormMessage />
           </FormItem>
         );
         break;
       case "Checkbox":
-        // console.log("Checkbox的props", componentProps.props);
+        // console.log("Checkbox的props", props);
         Component = (
           <FormItem className="flex w-full justify-start items-center">
-            <FormLabel className="w-1/6 font-bold">
+            <FormLabel className="w-1/6">
               {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
-              {componentProps.label}：
+              {label}：
             </FormLabel>
             <FormControl>
-              <Checkbox.Group {...componentProps.props} />
+              <Checkbox.Group {...props} />
             </FormControl>
             <FormMessage />
           </FormItem>
         );
         break;
       case "Switch":
-        // console.log("Switch的props", componentProps.props);
+        // console.log("Switch的props", props);
         Component = (
           <FormItem className="flex w-full justify-start items-center">
-            <FormLabel className="w-1/6 font-bold">
+            <FormLabel className="w-1/6">
               {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
-              {componentProps.label}：
+              {label}：
             </FormLabel>
             <FormControl>
-              <Switch {...componentProps.props} />
+              <Switch {...props} />
             </FormControl>
             <FormMessage />
           </FormItem>
