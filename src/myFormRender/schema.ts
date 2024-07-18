@@ -10,7 +10,10 @@ export const schemaTemplate = {
         placeholder: "请输入用户姓名",
         maxLength: 30,
         size: "middle",
-        hidden: "formData.radioType !== 1",
+        hidden: {
+          target: "radioType",
+          condition: "value != 1",
+        },
       },
       layout: "horizontal",
       panel: {
@@ -36,7 +39,10 @@ export const schemaTemplate = {
         placeholder: "请输入",
         maxLength: 30,
         size: "middle",
-        hidden: "formData.radioType !== 2",
+        hidden: {
+          target: "radioType",
+          condition: "value != 2",
+        },
       },
       layout: "horizontal",
       panel: {
@@ -64,7 +70,10 @@ export const schemaTemplate = {
         placeholder: "请输入",
         maxLength: 30,
         size: "middle",
-        hidden: "formData.radioType !== 3",
+        hidden: {
+          target: "radioType",
+          condition: "value != 3",
+        },
       },
       layout: "horizontal",
       panel: {
@@ -92,6 +101,10 @@ export const schemaTemplate = {
             label: "密码",
             value: "3",
           },
+          {
+            label: "全部显示",
+            value: "4",
+          },
         ],
       },
       layout: "horizontal",
@@ -99,7 +112,7 @@ export const schemaTemplate = {
         icon: "radio-field",
         label: "单选框",
       },
-      label: "选择显示哪个",
+      label: "选择隐藏哪个",
       type: "Radio", // Radio.Group
       chosen: false,
     },
@@ -150,6 +163,10 @@ export const schemaTemplate = {
             value: "2",
           },
         ],
+        disabled: {
+          target: "Switch",
+          condition: "value == true",
+        },
       },
       layout: "horizontal",
       panel: {
@@ -274,7 +291,7 @@ export const schemaTemplate = {
       chosen: false,
     },
     {
-      name: "Switch_IUbd4V",
+      name: "Switch",
       props: {
         size: "middle",
       },
@@ -283,7 +300,7 @@ export const schemaTemplate = {
         icon: "switch-field",
         label: "开关",
       },
-      label: "开关",
+      label: "是否禁用选择器",
       type: "Switch",
       valueProp: "checked",
       chosen: false,
@@ -305,4 +322,5 @@ export const schemaTemplate = {
       chosen: false,
     },
   ],
+  dependencies: [{}],
 };

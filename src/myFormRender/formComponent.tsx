@@ -1,8 +1,6 @@
-// import * as React from "react";
 import { Input } from "../ui/input";
 // import { Select } from "../../ui/select";
 import { cn } from "../utils/css";
-// import { useForm } from "react-hook-form";
 import { Select, Radio, Checkbox, Switch } from "antd";
 import {
   FormControl,
@@ -11,58 +9,50 @@ import {
   FormLabel,
   FormMessage,
 } from "./components/formItem";
-// import { getWidget } from "./mapping";
+import { useWatch, useForm } from "react-hook-form";
 
 export default function FormComponent(componentProps: any) {
-  // const { watch } = useForm()
-  // console.log('componentProps', form);
-  const { widgets, form, type, name, label, props } = componentProps;
+  const { form, type, name, label, props } = componentProps;
   const { hidden, disabled } = props;
-  function setFormValue(name: string, value: any) {
-    // console.log(name, "输入的值", value);
-    form.setValue(name, value);
-    // console.log("表单的值", form.getValues());
+  // const { register } = useForm()
+  let disabledVal = false;
+  if(disabled && disabled?.target) {
+    const value = CreateWatch(form.control, disabled?.target)
+    disabledVal = eval(disabled.condition)
   }
-  let hiddenItem = true;
-  let disabledItem = true;
-  // const valWatch = watch('radioType')
-  // console.log('监听单选', valWatch);
-  
-  if (hidden) {
-    const formData = form.getValues();
-    const dec = eval(hidden);
-    hiddenItem = dec;
-  }
-  // const Widget = getWidget(type, widgets);
-
-  // console.log('输出的Widget', Widget);
 
   let Component = null;
+  // 监听某个表单项的方法
+  function CreateWatch({control}:any, name:string) {
+    const watchResult = useWatch({
+      control,
+      name
+    })
+    return watchResult
+  }
   if (type) {
     switch (type) {
       case "Input":
-        console.log(name, "的props", props);
         Component = (
           <FormField
-            control={form?.control}
+            control={form.control}
             name={name}
-            render={(field) => (
-              <FormItem
-                className={cn(
-                  "flex w-full justify-start items-center ",
-                  hiddenItem && "hidden "
-                )}
-              >
-                <FormLabel className="w-1/6">
+            // {...register(name, {required: true, min: 8})}
+            render={({ field }) => (
+              <FormItem className={cn("my-3")}>
+                <FormLabel className={cn("my-2")}>
                   {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
                   {label}：
                 </FormLabel>
                 <FormControl>
                   <Input
                     className="h-9 text-sm"
-                    {...props}
-                    onChange={(e) => setFormValue(name, e.target.value)}
                     {...field}
+                    {...props}
+                    onChange={(e) =>
+                      field.onChange(e.target.value || undefined)
+                    }
+                    value={field.value}
                   />
                 </FormControl>
                 <FormMessage />
@@ -72,68 +62,119 @@ export default function FormComponent(componentProps: any) {
         );
         break;
       case "Select":
-        // console.log("Select的props", props);
         Component = (
-          <FormItem className="flex w-full justify-start items-center">
-            <FormLabel className="w-1/6">
-              {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
-              {label}：
-            </FormLabel>
-            <FormControl>
-              <Select {...props} onChange={(e) => setFormValue(name, e)} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
+          <FormField
+            control={form.control}
+            name={name}
+            render={({ field }) => (
+              <FormItem className={cn("")}>
+                <FormLabel className="w-36">
+                  {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
+                  {label}：
+                </FormLabel>
+                <FormControl>
+                  <Select
+                    {...field}
+                    {...props}
+                    onChange={(e) => field.onChange(e || undefined)}
+                    value={field.value}
+                    disabled={disabledVal}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         );
         break;
       case "Radio":
-        // console.log("Radio的props", props);
         Component = (
-          <FormItem className="flex w-full justify-start items-center">
-            <FormLabel className="w-1/6">
-              {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
-              {label}：
-            </FormLabel>
-            <FormControl>
-              <Radio.Group {...props} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
+          <FormField
+            control={form.control}
+            name={name}
+            render={({ field }) => (
+              <FormItem className={cn("")}>
+                <FormLabel className="w-36">
+                  {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
+                  {label}：
+                </FormLabel>
+                <FormControl>
+                  <Radio.Group
+                    {...field}
+                    {...props}
+                    onChange={(e) => field.onChange(e || undefined)}
+                    value={field.value}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         );
         break;
       case "Checkbox":
-        // console.log("Checkbox的props", props);
         Component = (
-          <FormItem className="flex w-full justify-start items-center">
-            <FormLabel className="w-1/6">
-              {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
-              {label}：
-            </FormLabel>
-            <FormControl>
-              <Checkbox.Group {...props} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
+          <FormField
+            control={form.control}
+            name={name}
+            render={({ field }) => (
+              <FormItem className={cn("")}>
+                <FormLabel className="w-36">
+                  {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
+                  {label}：
+                </FormLabel>
+                <FormControl>
+                  <Checkbox.Group
+                    {...field}
+                    {...props}
+                    onChange={(e) => field.onChange(e || undefined)}
+                    value={field.value}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         );
         break;
       case "Switch":
         // console.log("Switch的props", props);
         Component = (
-          <FormItem className="flex w-full justify-start items-center">
-            <FormLabel className="w-1/6">
-              {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
-              {label}：
-            </FormLabel>
-            <FormControl>
-              <Switch {...props} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
+          <FormField
+            control={form.control}
+            name={name}
+            render={({ field }) => (
+              <FormItem className={cn("")}>
+                <FormLabel className="w-36">
+                  {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
+                  {label}：
+                </FormLabel>
+                <FormControl>
+                  <Switch
+                    {...field}
+                    {...props}
+                    onChange={(e) => field.onChange(e || undefined)}
+                    value={field.value}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         );
         break;
       default:
         break;
     }
   }
+
+  if (hidden?.target) {
+    const value = CreateWatch(form.control, hidden.target)
+    Component = <div>
+      {eval(`${hidden.condition}`) && Component}
+    </div>
+  }
+  
+
   return Component;
 }

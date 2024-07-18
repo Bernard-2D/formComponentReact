@@ -44,9 +44,15 @@ const XDemo = () => {
   const handleSubmit = () => {
     console.log('form的值为', form.getValues());
   }
+  const watch = {
+    '#': (allValues:any, changedValues:any) => { // '#': () => {} 等同于 onValuesChange
+      console.log('表单 allValues：', allValues);
+      console.log('表单 changedValues：', changedValues);
+    },
+  }
   return (
     <div>
-      <FormRender form={form} schema={schema} />
+      <FormRender watch={watch} form={form} schema={schema} />
       <Button type="primary" onClick={handleSubmit}>
         提交
       </Button>

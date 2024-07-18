@@ -15,7 +15,7 @@ export default function InitForm() {
     watch,
     formState: { errors },
     handleSubmit,
-    trigger,
+    // trigger,
   } = useForm<IFormInputs>();
   const watchShowAge = watch("showAge", false); // you can supply default value as second argument
   // const watchAllFields = watch(); // when pass nothing as argument, you are watching everything
@@ -44,7 +44,7 @@ export default function InitForm() {
             <input type="number" {...register("age", { min: 50 })} />
           </>
         )}
-        <input {...register("firstName", { required: true })} />
+        {/* <input {...register("firstName", { required: true })} />
         <input {...register("lastName", { required: true })} />
         <button
           type="button"
@@ -53,8 +53,8 @@ export default function InitForm() {
           }}
         >
           Trigger
-        </button>
-        <button
+        </button> */}
+        {/* <button
           type="button"
           onClick={() => {
             trigger(["firstName", "lastName"]);
@@ -69,7 +69,7 @@ export default function InitForm() {
           }}
         >
           Trigger All
-        </button>
+        </button> */}
         <input type="submit" />
       </form>
     </>
