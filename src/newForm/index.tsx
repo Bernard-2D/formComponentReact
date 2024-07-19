@@ -11,22 +11,31 @@ import {
   // FormMessage,
 } from "../ui/form";
 import FormComponent from "../myFormRender/formComponent";
+
+type WatchProperties = {
+  [path: string]:
+  | {
+    handler: (value: any) => void;
+    immediate?: boolean;
+  }
+  | ((value: any) => void);
+};
 interface FormRenderProps {
   form: any;
   schema: any;
+  watch: WatchProperties;
   submintFunction?: Function;
   closeFunction?: Function;
 }
 
 export default function NewFormRender(props: FormRenderProps) {
-  const { form, schema, submintFunction, closeFunction } = props;
-  // console.log("schema", schema);
+  const { form, schema, submintFunction, closeFunction, watch } = props;
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(submintFunction)}>
         {schema?.properties?.map((item: any, index: number) => {
-          return <FormComponent form={form} key={index} {...item} />;
+          return <FormComponent watch={watch} form={form} key={index} {...item} />;
         })}
         <div className="col-start-1 space-x-2.5">
           <Button onClick={closeFunction}>取消</Button>
