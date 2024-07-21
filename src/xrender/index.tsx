@@ -1,6 +1,7 @@
 import FormRender, { useForm } from 'form-render'
 // import React from 'react';
 import { Button } from 'antd';
+import { log } from 'console';
 // import { schemaTemplate } from "../simpleForm/schema";
 
 const schema = {
@@ -50,8 +51,13 @@ const XDemo = () => {
       console.log('表单 changedValues：', changedValues);
     },
   }
+  // const catchChange = (changedValues: any, _allValues: any) => {
+  //   console.log('val', changedValues);
+  //   console.log('_allValues', _allValues);
+  // }
   return (
     <div>
+      {/* watch={watch} */}
       <FormRender watch={watch} form={form} schema={schema} />
       <Button type="primary" onClick={handleSubmit}>
         提交

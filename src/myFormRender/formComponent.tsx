@@ -12,23 +12,34 @@ import {
 import { useWatch, useForm } from "react-hook-form";
 
 export default function FormComponent(componentProps: any) {
-  const { form, type, name, label, props } = componentProps;
-  const { hidden, disabled } = props;
-  // const { register } = useForm()
-  let disabledVal = false;
-  if(disabled && disabled?.target) {
-    const value = CreateWatch(form.control, disabled?.target)
-    disabledVal = eval(disabled.condition)
+  const { form, type, name, label, props, watch } = componentProps;
+  let watchAll = false,
+    watchCurrent = false;
+  if (watch) {
+    Object.keys(watch).map((key: any) => {
+      watchAll = key === "#" ? true : false;
+      watchCurrent = key === name ? true : false;
+      console.log("监听的对象的回调方法", watch[key]);
+    });
+    console.log('watchAll', watchAll);
+    console.log('watchCurrent', watchCurrent);
   }
+  const { hidden } = props;
+  // const { register } = useForm()
+  // let disabledVal = false;
+  // if (disabled && disabled?.target) {
+  //   const value = CreateWatch(form.control, disabled?.target);
+  //   disabledVal = eval(disabled.condition);
+  // }
 
   let Component = null;
   // 监听某个表单项的方法
-  function CreateWatch({control}:any, name:string) {
+  function CreateWatch({ control }: any, name: string) {
     const watchResult = useWatch({
       control,
-      name
-    })
-    return watchResult
+      name,
+    });
+    return watchResult;
   }
   if (type) {
     switch (type) {
@@ -78,7 +89,7 @@ export default function FormComponent(componentProps: any) {
                     {...props}
                     onChange={(e) => field.onChange(e || undefined)}
                     value={field.value}
-                    disabled={disabledVal}
+                    // disabled={disabledVal}
                   />
                 </FormControl>
                 <FormMessage />
@@ -169,12 +180,9 @@ export default function FormComponent(componentProps: any) {
   }
 
   if (hidden?.target) {
-    const value = CreateWatch(form.control, hidden.target)
-    Component = <div>
-      {eval(`${hidden.condition}`) && Component}
-    </div>
+    const value = CreateWatch(form.control, hidden.target);
+    Component = <div>{eval(`${hidden.condition}`) && Component}</div>;
   }
-  
 
   return Component;
 }

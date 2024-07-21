@@ -28,41 +28,15 @@ function App() {
     console.log('重置表单');
   }
 
-  // function InputWatchRadio({ control }: any) {
-  //   const watchResult = useWatch({
-  //     control,
-  //     name: "radioValue",
-  //     defaultValue: 1,
-  //   });
-  //   return (
-  //     <div>
-  //       {watchResult == 2 && (
-  //         <FormField
-  //           control={form.control}
-  //           name="phone"
-  //           render={({ field }) => (
-  //             <FormItem>
-  //               <FormLabel>手机号</FormLabel>
-  //               <FormControl>
-  //                 <Input
-  //                   className="h-9 text-sm"
-  //                   onChange={(e) =>
-  //                     field.onChange(e.target.value || undefined)
-  //                   }
-  //                   value={field.value}
-  //                 />
-  //               </FormControl>
-  //               <FormMessage />
-  //             </FormItem>
-  //           )}
-  //         />
-  //       )}
-  //     </div>
-  //   );
-  // }
+  const watch = {
+    '#': (allValues:any, changedValues:any) => { // '#': () => {} 等同于 onValuesChange
+      console.log('表单 allValues：', allValues);
+      console.log('表单 changedValues：', changedValues);
+    },
+  }
 
   return (
-    <NewFormRender form={form} schema={schemaTemplate} submintFunction={handleSubmint} closeFunction={valReset}/>
+    <NewFormRender watch={watch} form={form} schema={schemaTemplate} submintFunction={handleSubmint} closeFunction={valReset}/>
     // <div className="w-1/2">
     //   {/* <FormRender form={form} schema={schemaTemplate} /> */}
     //   <Form {...form}>
