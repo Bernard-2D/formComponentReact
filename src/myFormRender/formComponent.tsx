@@ -9,7 +9,7 @@ import {
   FormLabel,
   FormMessage,
 } from "./components/formItem";
-import { useWatch, useForm } from "react-hook-form";
+import { useWatch } from "react-hook-form";
 
 export default function FormComponent(componentProps: any) {
   const { form, type, name, label, props, watch } = componentProps;
@@ -19,10 +19,20 @@ export default function FormComponent(componentProps: any) {
     Object.keys(watch).map((key: any) => {
       watchAll = key === "#" ? true : false;
       watchCurrent = key === name ? true : false;
-      console.log("监听的对象的回调方法", watch[key]);
+      // console.log("监听的对象的回调方法", watch[key]);
+      if(watchAll || watchCurrent) {
+        const value = CreateWatch(form.control, name);
+        const change = {
+          [name]: value
+        }
+        const allValue = form.getValues();
+        // console.log('监听到的值', change);
+        // console.log('监听到的表单', allValue);
+        watch[key](change, allValue)
+      }
     });
-    console.log('watchAll', watchAll);
-    console.log('watchCurrent', watchCurrent);
+    // console.log('watchAll', watchAll);
+    // console.log('watchCurrent', watchCurrent);
   }
   const { hidden } = props;
   // const { register } = useForm()

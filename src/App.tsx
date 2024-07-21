@@ -29,8 +29,8 @@ function App() {
   }
 
   const watch = {
-    '#': (allValues:any, changedValues:any) => { // '#': () => {} 等同于 onValuesChange
-      console.log('表单 allValues：', allValues);
+    '#': (changedValues:any, allValues:any) => { // '#': () => {} 等同于 onValuesChange
+      console.log('自定义watch表单 allValues：', allValues);
       console.log('表单 changedValues：', changedValues);
     },
   }
