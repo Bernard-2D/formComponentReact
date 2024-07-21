@@ -1,5 +1,5 @@
 import FormRender, { useForm } from 'form-render'
-import React from 'react';
+// import React from 'react';
 import { Button } from 'antd';
 // import { schemaTemplate } from "../simpleForm/schema";
 
