@@ -1,7 +1,6 @@
 import FormRender, { useForm } from 'form-render'
 // import React from 'react';
 import { Button } from 'antd';
-import { log } from 'console';
 // import { schemaTemplate } from "../simpleForm/schema";
 
 const schema = {
@@ -46,9 +45,15 @@ const XDemo = () => {
     console.log('form的值为', form.getValues());
   }
   const watch = {
-    '#': (allValues:any, changedValues:any) => { // '#': () => {} 等同于 onValuesChange
-      console.log('表单 allValues：', allValues);
-      console.log('表单 changedValues：', changedValues);
+    // '#': (allValues:any, changedValues:any) => { // '#': () => {} 等同于 onValuesChange
+    //   console.log('表单 allValues：', allValues);
+    //   console.log('表单 changedValues：', changedValues);
+    // },
+    'input1': (value: any) => {
+      console.log("input1", value);
+    },
+    'input2': (value: any) => {
+      console.log("input2", value);
     },
   }
   // const catchChange = (changedValues: any, _allValues: any) => {

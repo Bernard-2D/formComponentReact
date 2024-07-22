@@ -25,18 +25,30 @@ function App() {
 
   function valReset() {
     form.reset();
-    console.log('重置表单');
+    console.log("重置表单");
   }
 
   const watch = {
-    '#': (changedValues:any, allValues:any) => { // '#': () => {} 等同于 onValuesChange
-      console.log('自定义watch表单 allValues：', allValues);
-      console.log('表单 changedValues：', changedValues);
+    // '#': (changedValues:any, allValues:any) => { // '#': () => {} 等同于 onValuesChange
+    //   console.log('自定义watch表单 allValues：', allValues);
+    //   console.log('表单 changedValues：', changedValues);
+    // },
+    'username': (value: any) => {
+      console.log("监听用户名", value);
     },
-  }
+    'phone': (value: any) => {
+      console.log("监听手机号", value);
+    },
+  };
 
   return (
-    <NewFormRender watch={watch} form={form} schema={schemaTemplate} submintFunction={handleSubmint} closeFunction={valReset}/>
+    <NewFormRender
+      watch={watch}
+      form={form}
+      schema={schemaTemplate}
+      submintFunction={handleSubmint}
+      closeFunction={valReset}
+    />
     // <div className="w-1/2">
     //   {/* <FormRender form={form} schema={schemaTemplate} /> */}
     //   <Form {...form}>

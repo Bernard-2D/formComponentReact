@@ -1,16 +1,9 @@
-// import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-// import { useWatch } from "react-hook-form";
-// import { Radio } from "antd";
 import {
-  Form,
-  // FormControl,
-  // FormField,
-  // FormItem,
-  // FormLabel,
-  // FormMessage,
+  Form
 } from "../ui/form";
 import FormComponent from "../myFormRender/formComponent";
+import { cn } from "../utils/css";
 
 type WatchProperties = {
   [path: string]:
@@ -30,12 +23,13 @@ interface FormRenderProps {
 
 export default function NewFormRender(props: FormRenderProps) {
   const { form, schema, submintFunction, closeFunction, watch } = props;
-
+  const { displayType, colume } = schema;
+  console.log('schemaProps', displayType, colume);
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(submintFunction)}>
+      <form className={cn('grid grid-cols-2 gap-x-10 gap-y-5 pt-4')}  onSubmit={form.handleSubmit(submintFunction)}>
         {schema?.properties?.map((item: any, index: number) => {
-          return <FormComponent watch={watch} form={form} key={index} {...item} />;
+          return <FormComponent display={displayType} colume={colume} watch={watch} form={form} key={index} {...item} />;
         })}
         <div className="col-start-1 space-x-2.5">
           <Button onClick={closeFunction}>取消</Button>
