@@ -1,7 +1,8 @@
 export const schemaTemplate = {
   type: "object",
-  displayType: "row",
-  colume: 2,
+  displayType: "row", // row column
+  formType: "editForm", // editForm searchForm
+  column: 2, // 1 2
   properties: [
     {
       name: "username",

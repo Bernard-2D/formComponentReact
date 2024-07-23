@@ -1,17 +1,15 @@
 import { Button } from "../ui/button";
-import {
-  Form
-} from "../ui/form";
+import { Form } from "../ui/form";
 import FormComponent from "../myFormRender/formComponent";
 import { cn } from "../utils/css";
 
 type WatchProperties = {
   [path: string]:
-  | {
-    handler: (value: any) => void;
-    immediate?: boolean;
-  }
-  | ((value: any) => void);
+    | {
+        handler: (value: any) => void;
+        immediate?: boolean;
+      }
+    | ((value: any) => void);
 };
 interface FormRenderProps {
   form: any;
@@ -23,13 +21,28 @@ interface FormRenderProps {
 
 export default function NewFormRender(props: FormRenderProps) {
   const { form, schema, submintFunction, closeFunction, watch } = props;
-  const { displayType, colume } = schema;
-  console.log('schemaProps', displayType, colume);
+  const { displayType, column, formType } = schema;
+  console.log("schemaProps", displayType, column);
   return (
     <Form {...form}>
-      <form className={cn('grid grid-cols-2 gap-x-10 gap-y-5 pt-4')}  onSubmit={form.handleSubmit(submintFunction)}>
+      <form
+        className={cn(
+          column === 2 && "grid grid-cols-2 gap-x-10 gap-y-5 pt-4"
+        )}
+        onSubmit={form.handleSubmit(submintFunction)}
+      >
         {schema?.properties?.map((item: any, index: number) => {
-          return <FormComponent display={displayType} colume={colume} watch={watch} form={form} key={index} {...item} />;
+          return (
+            <FormComponent
+              display={displayType}
+              column={column}
+              formType={formType}
+              watch={watch}
+              form={form}
+              key={index}
+              {...item}
+            />
+          );
         })}
         <div className="col-start-1 space-x-2.5">
           <Button onClick={closeFunction}>取消</Button>

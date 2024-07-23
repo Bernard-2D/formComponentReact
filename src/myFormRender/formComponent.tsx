@@ -1,7 +1,7 @@
 import { Input } from "../ui/input";
-// import { Select } from "../../ui/select";
+import { Select } from "../ui/select";
 import { cn } from "../utils/css";
-import { Select, Radio, Checkbox, Switch } from "antd";
+import { Radio, Checkbox, Switch } from "antd";
 import {
   FormControl,
   FormField,
@@ -12,7 +12,7 @@ import {
 import { useWatch } from "react-hook-form";
 
 export default function FormComponent(componentProps: any) {
-  const { form, type, name, label, props, watch, display, colume } =
+  const { form, type, name, label, props, watch, display, column, formType } =
     componentProps;
   let watchAll = false,
     watchCurrent = false;
@@ -55,21 +55,25 @@ export default function FormComponent(componentProps: any) {
             render={({ field }) => (
               <FormItem className={cn("")}>
                 {/* <div> */}
+                {formType !== "searchForm" && (
                   <FormLabel className={cn("")}>
                     {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
                     {label}：
                   </FormLabel>
-                  <FormControl>
-                    <Input
-                      className="h-9 text-sm"
-                      {...field}
-                      {...props}
-                      onChange={(e) =>
-                        field.onChange(e.target.value || undefined)
-                      }
-                      value={field.value}
-                    />
-                  </FormControl>
+                )}
+                <FormControl className={cn(formType === "searchForm" && "w-60")}>
+                  <Input
+                    className={cn(
+                      "h-9 text-sm"
+                    )}
+                    {...field}
+                    {...props}
+                    onChange={(e) =>
+                      field.onChange(e.target.value || undefined)
+                    }
+                    value={field.value}
+                  />
+                </FormControl>
                 {/* </div> */}
                 <FormMessage />
               </FormItem>
@@ -84,12 +88,15 @@ export default function FormComponent(componentProps: any) {
             name={name}
             render={({ field }) => (
               <FormItem className={cn("")}>
-                <FormLabel className="">
-                  {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
-                  {label}：
-                </FormLabel>
-                <FormControl>
+                {formType !== "searchForm" && (
+                  <FormLabel className={cn("")}>
+                    {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
+                    {label}：
+                  </FormLabel>
+                )}
+                <FormControl className={cn(formType === "searchForm" && "w-60")}>
                   <Select
+                    // className={cn(formType === "searchForm" && "w-60")}
                     {...field}
                     {...props}
                     onChange={(e) => field.onChange(e || undefined)}
@@ -109,11 +116,13 @@ export default function FormComponent(componentProps: any) {
             name={name}
             render={({ field }) => (
               <FormItem className={cn("")}>
-                <FormLabel className="">
-                  {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
-                  {label}：
-                </FormLabel>
-                <FormControl>
+                {formType !== "searchForm" && (
+                  <FormLabel className={cn("")}>
+                    {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
+                    {label}：
+                  </FormLabel>
+                )}
+                <FormControl  className={cn(formType === "searchForm" && "w-60")}>
                   <Radio.Group
                     {...field}
                     {...props}
@@ -134,10 +143,12 @@ export default function FormComponent(componentProps: any) {
             name={name}
             render={({ field }) => (
               <FormItem className={cn("")}>
-                <FormLabel className="">
-                  {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
-                  {label}：
-                </FormLabel>
+                {formType !== "searchForm" && (
+                  <FormLabel className={cn("")}>
+                    {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
+                    {label}：
+                  </FormLabel>
+                )}
                 <FormControl>
                   <Checkbox.Group
                     {...field}
@@ -160,10 +171,12 @@ export default function FormComponent(componentProps: any) {
             name={name}
             render={({ field }) => (
               <FormItem className={cn("")}>
-                <FormLabel className="">
-                  {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
-                  {label}：
-                </FormLabel>
+                {formType !== "searchForm" && (
+                  <FormLabel className={cn("")}>
+                    {/* after:ml-0.5 after:text-destructive after:content-['*'] */}
+                    {label}：
+                  </FormLabel>
+                )}
                 <FormControl>
                   <Switch
                     {...field}
