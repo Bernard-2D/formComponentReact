@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(222.2 84% 4.9%);
+
+    --card: hsl(0 0% 100%);
+    --card-foreground: hsl(222.2 84% 4.9%);
+
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(222.2 84% 4.9%);
+
+    --primary: #3284ff;
+    --primary-foreground: hsl(210 40% 98%);
+
+    /* --primary-1: #F1F3F5; */
+
+    --secondary: hsl(210 40% 96.1%);
+    --secondary-foreground: #3284ff;
+
+    --muted: hsl(210 40% 96.1%);
+    --muted-foreground: hsl(215.4 16.3% 46.9%);
+
+    --accent: hsl(210 40% 96.1%);
+    --accent-foreground: #3284ff;
+
+    --destructive: hsl(0 84.2% 60.2%);
+    --destructive-foreground: hsl(210 40% 98%);
+
+    --border: #e5e5e5;
+    --input: #e5e5e5;
+    --ring: hsl(0, 0%, 100%);
+    --radius: 0.5rem;
+
+    --zg-main: #3284ff;
+    --zg-main-1: #e6f0ff;
+    --zg-main-2: #f5f9ff;
+
+    --zg-success: #30bf73;
+    --zg-success-1: #e0f6ea;
+
+    --zg-warn: #FF9832;
+
+    --zg-error: #ff524c;
+    --zg-error-1: #ffe5e4;
+
+    --zg-minor: #2e3238;
+    --zg-minor-1: #6d7178;
+    --zg-minor-2: #9299a0;
+    --zg-minor-3: #abb1ba;
+    --zg-minor-4: #d3d9df;
+    --zg-minor-5: #ebebeb;
+    --zg-minor-6: #f4f5f7;
+    --zg-minor-7: #f1f3f5;
+  }
+
+  .dark {
+    --background: hsl(222.2 84% 4.9%);
+    --foreground: hsl(210 40% 98%);
+
+    --card: hsl(222.2 84% 4.9%);
+    --card-foreground: hsl(210 40% 98%);
+
+    --popover: hsl(222.2 84% 4.9%);
+    --popover-foreground: hsl(210 40% 98%);
+
+    --primary: hsl(210 40% 98%);
+    --primary-foreground: #3284ff;
+
+    --secondary: hsl(217.2 32.6% 17.5%);
+    --secondary-foreground: hsl(210 40% 98%);
+
+    --muted: hsl(217.2 32.6% 17.5%);
+    --muted-foreground: hsl(215 20.2% 65.1%);
+
+    --accent: hsl(217.2 32.6% 17.5%);
+    --accent-foreground: hsl(210 40% 98%);
+
+    --destructive: hsl(0 62.8% 30.6%);
+    --destructive-foreground: hsl(210 40% 98%);
+
+    --border: hsl(217.2 32.6% 17.5%);
+    --input: hsl(217.2 32.6% 17.5%);
+    --ring: hsl(212.7 26.8% 83.9%);
+  }
+
+  /* width */
+  /* ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  /* Track */
+  /* ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  } */
+
+  /* Handle */
+  /* ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+  } */
+
+  /* Handle on hover */
+  /* ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  } */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply overflow-hidden;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
